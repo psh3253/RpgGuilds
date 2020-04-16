@@ -18,7 +18,7 @@ class Util
     public static function getPlayer(string $name)
     {
         $onlinePlayers = [];
-        for ($length = ($onlinePlayers = Server::getInstance()->getOnlinePlayers())->length, $i = 0; $i < $length; ++$i) {
+        for ($length = count($onlinePlayers = Server::getInstance()->getOnlinePlayers()), $i = 0; $i < $length; ++$i) {
             $player = $onlinePlayers[$i];
             if ($player->getDisplayName() === $name) {
                 return $player;
@@ -29,10 +29,11 @@ class Util
 
     public static function sendMessage(Player $player, string $m)
     {
-        $player->sendMessage(strval(Util::$stub) . $m);
+        $player->sendMessage(Util::$stub . $m);
     }
 
-    public static function getInstance() : Util{
+    public static function getInstance(): Util
+    {
         return self::$instance;
     }
 }

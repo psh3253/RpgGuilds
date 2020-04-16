@@ -1,15 +1,14 @@
 <?php
-
 namespace astar\RpgGuilds;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
 
-class gBankHandler implements CommandExecutor
+class hqCommand implements CommandExecutor
 {
     /**
-     * @var gBankHandler
+     * @var hqCommand
      */
     private static $instance = null;
 
@@ -20,7 +19,7 @@ class gBankHandler implements CommandExecutor
 
     public function __construct(RpgGuilds $plugin)
     {
-        if (self::$instance == null)
+        if(self::$instance == null)
             self::$instance = $this;
 
         $this->plugin = $plugin;
@@ -28,6 +27,6 @@ class gBankHandler implements CommandExecutor
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
-        return false;
+
     }
 }

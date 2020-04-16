@@ -11,9 +11,15 @@ use pocketmine\utils\TextFormat;
 
 class RpgGuilds extends PluginBase implements Listener
 {
-    static $plugin;
-    public static $wgPlugin;
-    public $gbanks = [];
+    /**
+     * @var RpgGuilds
+     */
+    private static $instance;
+
+    /**
+     * @var array
+     */
+    public $config = [];
 
     public function onEnable()
     {
@@ -35,20 +41,21 @@ class RpgGuilds extends PluginBase implements Listener
             $this->getLogger()->info(TextFormat::RED . "[BankManager] Hooked Onto WorldGuard");
         }
         $this->saveDefaultConfig();
-        if (!$this->getConfig()->exists("TP")) {
-            $this->getConfig()->set("TP", (Object)false);
+        $this->config = $this->getConfig()->getAll();
+        if (!isset($this->config["TP"])) {
+            $this->config["TP"] = false;
             $this->saveConfig();
         }
-        if (!$this->getConfig()->exists("Guild Names in Chat")) {
-            $this->getConfig()->set("Guild Names in Chat", true);
+        if (!isset($this->config["Guild Names in Chat"])) {
+            $this->config["Guild Names in Chat"] = true;
             $this->saveConfig();
         }
-        if (!$this->getConfig()->exists("Chat")) {
-            $this->getConfig()->set("Chat", true);
+        if (!isset($this->config["Chat"])) {
+            $this->config["Chat"] = true;
             $this->saveConfig();
         }
-        if (!$this->getConfig()->exists("No Build")) {
-            $this->getConfig()->set("No Build", true);
+        if (!isset($this->config["No Build"])) {
+            $this->config["No Build"] = true;
             $this->saveConfig();
         }
         if (!$this->setupEconomy()) {
@@ -66,7 +73,8 @@ class RpgGuilds extends PluginBase implements Listener
         return $econ != null;
     }
 
-    public function onDisable() {
+    public function onDisable()
+    {
         $this->getLogger()->info("RpgGuilds has been Disabled!");
         $this->saveConfig();
     }
@@ -81,5 +89,8 @@ class RpgGuilds extends PluginBase implements Listener
         return false;
     }
 
-
+    public static function getInstance(): RpgGuilds
+    {
+        return self::$instance;
+    }
 }

@@ -11,9 +11,22 @@ class BankCommands
     /**
      * @var BankCommands
      */
-    private static $instance;
+    private static $instance = null;
 
-    public function bankCommands(CommandSender $sender, Command $command, string $label, array $args): bool
+    /**
+     * @var RpgGuilds
+     */
+    private $plugin;
+
+    public function __construct(RpgGuilds $plugin)
+    {
+        if(self::$instance == null)
+            self::$instance = $this;
+
+        $this->plugin = $plugin;
+    }
+
+    public function bankCommands(CommandSender $sender, array $args): bool
     {
         if (!($sender instanceof Player)) {
             return true;
@@ -22,7 +35,8 @@ class BankCommands
         return true;
     }
 
-    public static function getInstance() : BankCommands{
+    public static function getInstance(): BankCommands
+    {
         return self::$instance;
     }
 }

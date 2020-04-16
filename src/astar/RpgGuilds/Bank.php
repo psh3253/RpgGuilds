@@ -8,8 +8,22 @@ class Bank
 {
     private $inv;
 
-    public function Bank(string $name)
+    /**
+     * @var gTP
+     */
+    private static $instance = null;
+
+    /**
+     * @var RpgGuilds
+     */
+    private $plugin;
+
+    public function __construct(RpgGuilds $plugin, string $name)
     {
+        if(self::$instance == null)
+            self::$instance = $this;
+
+        $this->plugin = $plugin;
         $this->loadBank($name, $this->inv);
     }
 
