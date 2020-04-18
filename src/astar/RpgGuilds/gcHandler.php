@@ -1,4 +1,5 @@
 <?php
+
 namespace astar\RpgGuilds;
 
 use pocketmine\command\Command;
@@ -20,7 +21,7 @@ class gcHandler implements CommandExecutor
 
     public function __construct(RpgGuilds $plugin)
     {
-        if(self::$instance == null)
+        if (self::$instance == null)
             self::$instance = $this;
 
         $this->plugin = $plugin;
@@ -35,22 +36,22 @@ class gcHandler implements CommandExecutor
             $player->sendMessage("You are not even in a guild? how can you expect to talk in one?");
             return true;
         }
-        if(!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["Gchat"]){
+        if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["Gchat"]) {
             $player->sendMessage("You do not have permission to talk in this guild!");
             return true;
         }
         $buffer = "";
         for ($i = 0; $i < count($args); ++$i) {
-        $buffer = $buffer . " " . $args[$i];
-    }
+            $buffer = $buffer . " " . $args[$i];
+        }
         $s = (string)$buffer;
         $title = $this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["Title"];
-        foreach ($this->plugin->config["Guilds"][$guildn]["Players"] as $key => $value){
-        if (Server::getInstance()->getPlayer($key) != null) {
-            $p = Server::getInstance()->getPlayer($key);
+        foreach ($this->plugin->config["Guilds"][$guildn]["Players"] as $key => $value) {
+            if (Server::getInstance()->getPlayer($key) != null) {
+                $p = Server::getInstance()->getPlayer($key);
                 $p->sendMessage("§F[" . $title . "§F]" . $player->getName() . ": §2" . $s);
             }
-    }
+        }
         return true;
     }
 }

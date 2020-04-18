@@ -72,7 +72,7 @@ class gTP implements CommandExecutor
         {
             return true;
         }
-        $p->teleport($player);
+        $this->plugin->teleport($player, $p);
         return true;
     }
 }

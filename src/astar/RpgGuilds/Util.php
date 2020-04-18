@@ -2,7 +2,6 @@
 
 namespace astar\RpgGuilds;
 
-use pocketmine\level\Location;
 use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;

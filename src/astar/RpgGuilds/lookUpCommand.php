@@ -2,7 +2,6 @@
 
 namespace astar\RpgGuilds;
 
-use onebone\economyapi\EconomyAPI;
 use pocketmine\command\Command;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
@@ -40,7 +39,6 @@ class lookUpCommand implements CommandExecutor
             return true;
         }
         $player = Server::getInstance()->getPlayer($args[0]);
-        $money = EconomyAPI::getInstance()->myMoney($player->getName());
         $kills = $this->plugin->config["Kills"][$player->getName()];
         $p->sendMessage("§APlayer Lookup: §e" . $player->getName());
         if (isset($this->plugin->config[$player->getName()])) {
@@ -48,7 +46,6 @@ class lookUpCommand implements CommandExecutor
             $p->sendMessage("§APlayer Lookup: §5Guild - " . $guild);
         }
         $p->sendMessage("§APlayer Lookup: §4Kills - " . $kills);
-        $p->sendMessage("§APlayer Lookup: §2Money - " . $money);
         return true;
     }
 }

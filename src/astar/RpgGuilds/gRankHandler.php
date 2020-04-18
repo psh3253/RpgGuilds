@@ -58,11 +58,6 @@ class gRankHandler implements CommandExecutor
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Gmotd"] = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Disband"] = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Gchat"] = true;
-            $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Gbank"] = false;
-            $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Addslot"] = false;
-            $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Withdrawl"] = false;
-            $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Deposit"] = false;
-            $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["GbRanks"] = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["RankSet"] = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["RankTitle"] = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["CreateRank"] = false;
@@ -257,7 +252,7 @@ class gRankHandler implements CommandExecutor
         {
             if ($args[0] === "list") {
                 $player = $sender;
-                $player->sendMessage("The available rank permissions are \nInvite\nKick\nGmotd\nDisband\nGchat\nGbank\nAddslot\nWithdrawl\nDeposit\nGbRanks\nRankSet\nRankTitle\nCreateRank\nDeleteRank\nPlayerInfo\nRankPerms\nOchat\nPlayerNotesView\nPlayerNotesSet\nTitle");
+                $player->sendMessage("The available rank permissions are \nInvite\nKick\nGmotd\nDisband\nGchat\nRankSet\nRankTitle\nCreateRank\nDeleteRank\nPlayerInfo\nRankPerms\nOchat\nPlayerNotesView\nPlayerNotesSet\nTitle");
                 return true;
             }
             if ($args[0] === "defaults") {
@@ -284,7 +279,9 @@ class gRankHandler implements CommandExecutor
                 $player->sendMessage("Improper usage! Please use /grank defaults {leader/newbies} new_rank_name");
                 return true;
             }
-
+            else{
+                return true;
+            }
         }
     }
 }
