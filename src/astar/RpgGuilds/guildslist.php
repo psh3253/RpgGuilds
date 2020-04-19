@@ -37,9 +37,9 @@ class guildslist implements CommandExecutor
                     ++$i;
                 }
                 if ($i == 1) {
-                    $player->sendMessage("§e" . $guilds . ": §2" . $i . " Player.");
+                    $player->sendMessage("§e" . $guilds . ": §2" . $i . " 유저.");
                 } else {
-                    $player->sendMessage("§e" . $guilds . ": §2" . $i . " Players.");
+                    $player->sendMessage("§e" . $guilds . ": §2" . $i . " 유저들.");
                 }
             }
         }

@@ -50,27 +50,27 @@ class TeleportTask extends Task
 
     public function onRun(int $currentTick)
     {
-        $this->player->sendMessage("Wait " . $this->count . " Seconds.");
-        $this->player2->sendMessage("Wait " . $this->count . " Seconds.");
+        $this->player->sendMessage($this->count . "초만 기다려주세요!");
+        $this->player2->sendMessage("Wait " . $this->count . "초만 기다려주세요!");
         --$this->count;
         if ($this->player->getLocation()->getX() != $this->loc->getX()) {
-            $this->player->sendMessage("Cancelled teleport, don't move!");
-            $this->player2->sendMessage("Cancelled teleport, don't move!");
+            $this->player->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
+            $this->player2->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
             $this->onCancel();;
         }
         if ($this->player->getLocation()->getZ() != $this->loc->getZ()) {
-            $this->player->sendMessage("Cancelled teleport, don't move!");
-            $this->player2->sendMessage("Cancelled teleport, don't move!");
+            $this->player->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
+            $this->player2->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
             $this->onCancel();
         }
         if ($this->player2->getLocation()->getX() != $this->loc2->getX()) {
-            $this->player->sendMessage("Cancelled teleport, don't move!");
-            $this->player2->sendMessage("Cancelled teleport, don't move!");
+            $this->player->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
+            $this->player2->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
             $this->onCancel();
         }
         if ($this->player2->getLocation()->getZ() != $this->loc2->getZ()) {
-            $this->player->sendMessage("Cancelled teleport, don't move!");
-            $this->player2->sendMessage("Cancelled teleport, don't move!");
+            $this->player->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
+            $this->player2->sendMessage("순간이동이 취소되었습니다, 움직이지 마세요!");
             $this->onCancel();
         }
         if ($this->count == 0) {

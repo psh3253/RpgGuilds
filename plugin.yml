@@ -9,3 +9,38 @@ api:
   - 3.11.5
   - 3.11.6
   - 3.11.7
+  - 3.11.8
+  - 3.11.9
+  - 3.11.10
+
+commands:
+  길드:
+    description: Base guild command
+    usage: /길드 <생성, 초대, 수락, 거절, 입장메시지, 추방, 해산, 탈퇴, 목록>
+  g:
+    description: 길드 채팅
+    usage: /g <메시지>
+  길드계급:
+    description: 길드 계급
+    usage: /길드계급 <생성, 삭제, 설정, 칭호, 권한, 목록>
+  o:
+    description: 장교 채팅
+    usage: /o <메시지>
+  gtp:
+    description: 길드 순간이동
+    usage: /gtp <유저>
+  길드목록:
+    description: 길드 목록
+    usage: /길드목록
+  조회:
+    description: 유저 상태 조회
+    usage: /조회 <유저>
+  길드본부:
+    description: 길드본부 설정 또는 TP
+    usage: /길드본부 <설정, tp>
+
+permissions:
+  guild.create:
+    default: true
+  guild.teleport:
+    default: true

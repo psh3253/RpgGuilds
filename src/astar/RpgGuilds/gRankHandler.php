@@ -32,24 +32,24 @@ class gRankHandler implements CommandExecutor
         if (count($args) <= 0) {
             return false;
         }
-        if ($args[0] === "create") {
+        if ($args[0] === "생성") {
             $player = $sender;
             if (count($args) != 3) {
-                $player->sendMessage("Improper usage! Please use /grank create rank title");
+                $player->sendMessage("잘못된 사용법입니다! /길드계급 생성 <계급> <칭호>를 사용하세요!");
                 return true;
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to create a rank one?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["CreateRank"]) {
-                $player->sendMessage("You do not have permission to create a rank in this guild!");
+                $player->sendMessage("이 길드에서 계급을 생성할 권한이 없습니다!");
                 return true;
             }
             if ($this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]) {
-                $player->sendMessage("This rank already exists!");
+                $player->sendMessage("이 계급은 이미 존재합니다!");
                 return true;
             }
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Title"] = str_replace("&", "§", str_replace("_", " ", $args[2]));
@@ -70,26 +70,26 @@ class gRankHandler implements CommandExecutor
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["PlayerNotesSet"] = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["TP"] = false;
             $this->plugin->saveConfig();
-            $player->sendMessage("You have successfully created the rank " . str_replace("_", " ", $args[1]) . "!");
+            $player->sendMessage("성공적으로 계급 ".str_replace("_", " ", $args[1])."를 생성하였습니다!");
             return true;
-        } else if ($args[0] === "delete") {
+        } else if ($args[0] === "삭제") {
             $player = $sender;
             if (count($args) <= 1) {
-                $player->sendMessage("You must include a rank to delete!");
+                $player->sendMessage("삭제할 계급을 포함해야합니다!");
                 return true;
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to delete a rank?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["DeleteRank"]) {
-                $player->sendMessage("You do not have permission to delete a rank in this guild!");
+                $player->sendMessage("이 길드에서 계급을 삭제할 권한이 없습니다!");
                 return true;
             }
             if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]) {
-                $player->sendMessage("This rank doesn't exist!");
+                $player->sendMessage("이 계급은 존재하지 않습니다!");
                 return true;
             }
 
@@ -103,44 +103,44 @@ class gRankHandler implements CommandExecutor
                     }
 
                     $p = Server::getInstance()->getPlayer($key);
-                    $p->sendMessage("§3 Your rank has been changed to " . $newbies . "!");
+                    $p->sendMessage("§3 계급이 " . $newbies . "로 변경되었습니다!");
                 }
             }
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])] = null;
             $this->plugin->saveConfig();
-            $player->sendMessage("You have successfully deleted the rank " . str_replace("_", " ", $args[1]) . "!");
+            $player->sendMessage("성공적으로 계급 " . str_replace("_", " ", $args[1]) . "를 삭제하였습니다!");
             return true;
-        } else if ($args[0] === "set") {
+        } else if ($args[0] === "설정") {
             $player = $sender;
             if (count($args) != 3) {
-                $player->sendMessage("Improper usage! Please use /grank set playername rank");
+                $player->sendMessage("잘못된 사용법입니다! /길드계급 설정 <유저> <계급>을 사용하세요!");
                 return true;
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
             $prank = $this->plugin->config["Guilds"][$guildn]["Players"][$args[1]]["Rank"];
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to delete a rank?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["RankSet"]) {
-                $player->sendMessage("You do not have permission to set a players rank in this guild!");
+                $player->sendMessage("이 길드에서 플레이어 계급을 설정할 권한이 없습니다!");
                 return true;
             }
             if (!isset($this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[2])])) {
-                $player->sendMessage("This rank doesn't exist!");
+                $player->sendMessage("이 계급은 존재하지 않습니다!");
                 return true;
             }
             if (!isset($this->plugin->config["Guilds"][$guildn]["Players"][$args[1]])) {
-                $player->sendMessage("That player is not a part of your guild!");
+                $player->sendMessage("해당 유저는 길드의 구성원이 아닙니다!");
                 return true;
             }
             $leader = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
-            $player->sendMessage("grank = " . $grank . "prank = " . $prank . "guiln = " . $guildn . " leader = " . $leader);
+            //$player->sendMessage("grank = " . $grank . "prank = " . $prank . "guiln = " . $guildn . " leader = " . $leader);
 
             $newbie = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Default"];
             if (str_replace("_", " ", $args[2]) === $leader && !$grank === $leader) {
-                $player->sendMessage("You can not promote someone to Guild Leader this way!!");
+                $player->sendMessage("이런식으로 해당 유저를 길드 리더로 승격시킬 수 없습니다!!");
                 return true;
             }
             if (str_replace("_", " ", $args[2]) === $leader && $grank === $leader) {
@@ -148,140 +148,140 @@ class gRankHandler implements CommandExecutor
                 $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"] = $newbie;
                 $this->plugin->config["Guilds"][$guildn]["Leader"] = $args[1];
                 $this->plugin->saveConfig();
-                $player->sendMessage("You are no longer the leader of " . $guildn . ".");
+                $player->sendMessage("당신은 더 이상 " . $guildn . "의 리더가 아닙니다!");
                 foreach ($this->plugin->config["Guilds"][$guildn]["Players"] as $key2 => $value2) {
                     if (Server::getInstance()->getPlayer($key2) != null) {
                         $p2 = Server::getInstance()->getPlayer($key2);
                         if (!$p2->getName() === $args[1]) {
-                            $p2->sendMessage($args[1] . " is the new Leader of " . $guildn . ".");
+                            $p2->sendMessage($args[1] . "는 " . $guildn . "의 새로운 리더입니다!");
                         } else {
-                            $p2->sendMessage("You are the new Guild leader of " . $guildn . "!");
+                            $p2->sendMessage("당신은 " . $guildn . "의 새로운 길드 리더 입니다!");
                         }
                     }
                 }
                 return true;
             }
             if ($prank === $grank) {
-                $player->sendMessage("You can not change someone's rank if their rank is the same as yours!");
+                $player->sendMessage("해당 유저의 계급과 당신의 계급이 같으면 해당 유저의 계급을 변경할 수 없습니다!");
                 return true;
             }
             if (str_replace("_", " ", $args[2]) === $grank) {
-                $player->sendMessage("You can not set someone to the same rank as yours!");
+                $player->sendMessage("해당 유저를 당신의 계급과 같게 설정할 수 없습니다!");
                 return true;
             }
             if ($prank === $leader) {
-                $player->sendMessage("You cannot change a guild leaders rank in this fashion!");
+                $player->sendMessage("이런식으로 길드 리더의 계급을 변경할 수 없습니다!");
                 return true;
             }
             foreach ($this->plugin->config["Guilds"][$guildn]["Players"] as $key2 => $value2) {
                 if (Server::getInstance()->getPlayer($key2) != null) {
                     $p2 = Server::getInstance()->getPlayer($key2);
                     if (!$p2->getName() === $args[1]) {
-                        $p2->sendMessage($args[1] . " has been changed to the rank " . str_replace("_", " ", $args[2]) . ".");
+                        $p2->sendMessage($args[1] . "이 " . str_replace("_", " ", $args[2]) . " 계급으로 변경되었습니다!");
                     } else {
-                        $p2->sendMessage("You have been moved to the rank " . str_replace("_", " ", $args[2]) . ".");
+                        $p2->sendMessage("당신은 " . str_replace("_", " ", $args[2]) . " 계급으로 변경되었습니다!");
                     }
                 }
             }
             $this->plugin->config["Guilds"][$guildn]["Players"][$args[1]]["Rank"] = str_replace("_", " ", $args[2]);
             $this->plugin->saveConfig();
             return true;
-        } else if ($args[0] === "title") {
+        } else if ($args[0] === "칭호") {
             $player = $sender;
             if (count($args) != 3) {
-                $player->sendMessage("Improper usage! Please use /grank title rankname newtitle");
+                $player->sendMessage("잘못된 사용법입니다! /길드계급 칭호 <계급> <칭호>을 사용하세요!");
                 return true;
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to delete a rank?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["RankTitle"]) {
-                $player->sendMessage("You do not have permission to set a rank's Title in this guild!");
+                $player->sendMessage("이 길드에서 계급의 칭호를 설정할 권한이 없습니다!");
                 return true;
             }
             if (!isset($this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])])) {
-                $player->sendMessage("This rank doesn't exist!");
+                $player->sendMessage("이 계급은 존재하지 않습니다!");
                 return true;
             }
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])]["Title"] = str_replace("&", "§", str_replace("_", " ", $args[2]));
             $this->plugin->saveConfig();
-            $player->sendMessage("You have changed " . str_replace("_", " ", $args[1]) . "'s title to " . str_replace("&", "§", str_replace("_", " ", $args[2])) . ".");
+            $player->sendMessage(str_replace("_", " ", $args[1]) . "의 칭호를 " . str_replace("&", "§", str_replace("_", " ", $args[2])) . "로 변경하였습니다!");
             return true;
-        } else if ($args[0] === "perms") {
+        } else if ($args[0] === "권한") {
             $player = $sender;
             if (count($args) != 4) {
-                $player->sendMessage("Improper usage! Please use /grank perms rankname permission_name true/false");
+                $player->sendMessage("잘못된 사용법 입니다! Please use /길드계급 권한 <계급> <권한> <true/false>을 사용하세요!");
                 return true;
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to delete a rank?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["RankPerms"]) {
-                $player->sendMessage("You do not have permission to set a rank's permissions in this guild!");
+                $player->sendMessage("이 길드에서 계급의 권한을 설정할 권한이 없습니다!");
                 return true;
             }
             if (!isset($this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])])) {
-                $player->sendMessage("This rank doesn't exist!");
+                $player->sendMessage("이 계급은 존재하지 않습니다!");
                 return true;
             }
             $leader2 = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
             if (str_replace("_", " ", $args[1]) === $leader2) {
-                $player->sendMessage("You can not change a guild leaders permissions!");
+                $player->sendMessage("길드 리더의 권한을 변경할 수 없습니다!");
                 return true;
             }
             if ($args[3] === "true") {
                 $permbool = true;
                 $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])][str_replace("_", " ", $args[2])] = $permbool;
                 $this->plugin->saveConfig();
-                $player->sendMessage("Members with the rank " . str_replace("_", " ", $args[1]) . " now have  " . str_replace("_", " ", $args[2]) . " permissions.");
+                $player->sendMessage(str_replace("_", " ", $args[1]) . " 계급인 유저들은 이제 " . str_replace("_", " ", $args[2]) . " 권한을 갖습니다!");
                 return true;
             }
             $permbool = false;
             $this->plugin->config["Guilds"][$guildn]["Ranks"][str_replace("_", " ", $args[1])][str_replace("_", " ", $args[2])] = $permbool;
             $this->plugin->saveConfig();
-            $player->sendMessage("Members with the rank " . str_replace("_", " ", $args[1]) . " no longer have  " . str_replace("_", " ", $args[2]) . " permissions.");
+            $player->sendMessage(str_replace("_", " ", $args[1]) . " 계급인 유저들은 더 이상 " . str_replace("_", " ", $args[2]) . " 권한을 갖지 않습니다!");
             return true;
-        }
-        else
-        {
-            if ($args[0] === "list") {
+        } else {
+            if ($args[0] === "목록") {
                 $player = $sender;
-                $player->sendMessage("The available rank permissions are \nInvite\nKick\nGmotd\nDisband\nGchat\nRankSet\nRankTitle\nCreateRank\nDeleteRank\nPlayerInfo\nRankPerms\nOchat\nPlayerNotesView\nPlayerNotesSet\nTitle");
+                $player->sendMessage("이용 가능한 계급 권한 \nInvite\nKick\nGmotd\nDisband\nGchat\nRankSet\nRankTitle\nCreateRank\nDeleteRank\nPlayerInfo\nRankPerms\nOchat\nPlayerNotesView\nPlayerNotesSet\nTitle");
                 return true;
             }
-            if ($args[0] === "defaults") {
+            /**
+            if ($args[0] === "기본값") {
                 $player = $sender;
                 $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
                 $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
                 $leader2 = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
                 if (!$grank === $leader2) {
-                    $player->sendMessage("Only a guild leader can change the default rank names!");
+                    $player->sendMessage("오직 길드 리더만 기본 권한 이름을 변경할 수 있습니다!");
                     return true;
                 }
-                if ($args[1] === "leader") {
+                if ($args[1] === "리더") {
                     $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"] = str_replace("_", " ", str_replace("&", "§", $args[2]));
                     $this->plugin->saveConfig();
-                    $player->sendMessage("You have changed the leader rank name to " . str_replace("_", " ", str_replace("&", "§", $args[2])) . ".");
+                    $player->sendMessage("리더 계급 이름을 " . str_replace("_", " ", str_replace("&", "§", $args[2])) . "로 변경하였습니다.");
                     return true;
                 }
-                if ($args[1] === "newbies") {
+                if ($args[1] === "초보자") {
                     $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Default"] = str_replace("_", " ", str_replace("&", "§", $args[2]));
                     $this->plugin->saveConfig();
-                    $player->sendMessage("You have changed the default rank name to " . str_replace("_", " ", str_replace("&", "§", $args[2])) . ".");
+                    $player->sendMessage("기본 계급 이름을" . str_replace("_", " ", str_replace("&", "§", $args[2])) . "로 변경하였습니다.");
                     return true;
                 }
-                $player->sendMessage("Improper usage! Please use /grank defaults {leader/newbies} new_rank_name");
+                $player->sendMessage("잘못된 사용법 입니다! /길드계급 기본값 <리더/초보자> <계급 이름>");
+                return true;
+            } else {
                 return true;
             }
-            else{
-                return true;
-            }
+             **/
+            return true;
         }
     }
 }

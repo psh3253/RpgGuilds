@@ -33,11 +33,11 @@ class gcHandler implements CommandExecutor
         $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
         $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];;
         if (!isset($this->plugin->config[$player->getName()])) {
-            $player->sendMessage("You are not even in a guild? how can you expect to talk in one?");
+            $player->sendMessage("가입된 길드가 존재하지 않습니다!");
             return true;
         }
         if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["Gchat"]) {
-            $player->sendMessage("You do not have permission to talk in this guild!");
+            $player->sendMessage("이 길드에서 대화 할 권한이 없습니다!");
             return true;
         }
         $buffer = "";

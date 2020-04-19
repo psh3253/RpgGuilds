@@ -35,17 +35,17 @@ class hqCommand implements CommandExecutor
         if (count($args) <= 0) {
             return false;
         }
-        if ($args[0] === "set") {
+        if ($args[0] === "설정") {
             $player = $sender;
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to create a guild Headquarters?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
             $leader = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
             if (!$grank === $leader) {
-                $player->sendMessage("Only a guild leader can set the guild headquarters!");
+                $player->sendMessage("길드 리더만이 길드본부를 설정할 수 있습니다!");
                 return true;
             }
             if (!$player instanceof Entity) {
@@ -63,7 +63,7 @@ class hqCommand implements CommandExecutor
                     }
                     $gloc = new Location(Server::getInstance()->getLevel($world1), $X1, $Y1, $Z1);
                     if ($loc->distance($gloc) <= 100.0) {
-                        $player->sendMessage("This is too close to the guild headquarters of " . $guild . ".");
+                        $player->sendMessage("이곳은 " . $guild . "의 길드본부와 너무 가깝습니다!");
                         return true;
                     }
                     continue;
@@ -78,7 +78,7 @@ class hqCommand implements CommandExecutor
             $this->plugin->config["Guilds"][$guildn]["HQ"]["Z"] = $Z2;
             $this->plugin->config["Guilds"][$guildn]["HQ"]["World"] = $world2;
             $this->plugin->saveConfig();
-            $player->sendMessage("Guild Headquarters successfully saved!");
+            $player->sendMessage("길드본부가 성공적으로 저장되었습니다!");
             return true;
         } else {
             if (!$args[0] === "tp") {
@@ -86,12 +86,12 @@ class hqCommand implements CommandExecutor
             }
             $player = $sender;
             if (!isset($this->plugin->config[$player->getName()])) {
-                $player->sendMessage("You are not even in a guild? how can you expect to create a guild Headquarters?");
+                $player->sendMessage("가입된 길드가 존재하지 않습니다!");
                 return true;
             }
             $guild2 = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             if ($this->plugin->config["Guilds"][$guild2]["HQ"] == null) {
-                $player->sendMessage("Your guild does not have a Headquarters set!");
+                $player->sendMessage("당신의 길드가 길드본부를 아직 설정하지 않았습니다!");
                 return true;
             }
             $X3 = $this->plugin->config["Guilds"][$guild2]["HQ"]["X"];
