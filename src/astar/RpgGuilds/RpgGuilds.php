@@ -43,31 +43,37 @@ class RpgGuilds extends PluginBase implements Listener
         $this->getCommand("길드본부")->setExecutor(new hqCommand($this));
         $this->getCommand("길드계급")->setExecutor(new gRankHandler($this));
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("RpgGuilds가 활성화 되었습니다!");
+        $this->getLogger()->info("§d[ §f길드 §d] §fRpgGuilds가 활성화 되었습니다!");
 
         $this->saveDefaultConfig();
         $this->config = $this->getConfig()->getAll();
         if (!isset($this->config["TP"])) {
             $this->config["TP"] = false;
+            $this->getConfig()->setAll($this->config);
             $this->saveConfig();
         }
         if (!isset($this->config["Guild Names in Chat"])) {
             $this->config["Guild Names in Chat"] = true;
+            $this->getConfig()->setAll($this->config);
             $this->saveConfig();
         }
         if (!isset($this->config["Chat"])) {
             $this->config["Chat"] = true;
+            $this->getConfig()->setAll($this->config);
             $this->saveConfig();
         }
         if (!isset($this->config["No Build"])) {
             $this->config["No Build"] = true;
+            $this->getConfig()->setAll($this->config);
             $this->saveConfig();
         }
+        $this->config["Guilds"] = [];
     }
 
     public function onDisable()
     {
-        $this->getLogger()->info("RpgGuilds가 비활성화 되었습니다!");
+        $this->getLogger()->info("§d[ §f길드 §d] §fRpgGuilds가 비활성화 되었습니다!");
+        $this->getConfig()->setAll($this->config);
         $this->saveConfig();
     }
 
@@ -77,25 +83,25 @@ class RpgGuilds extends PluginBase implements Listener
         if ($this->config["No Build"]) {
             $loc = $p->getLocation();
             foreach ($this->config["Guilds"] as $guild => $value) {
-                if ($this->config["Guilds"][$guild]["HQ"] != null) {
+                if (isset($this->config["Guilds"][$guild]["HQ"])) {
                     $X1 = $this->config["Guilds"][$guild]["HQ"]["X"];
                     $Y1 = $this->config["Guilds"][$guild]["HQ"]["Y"];
                     $Z1 = $this->config["Guilds"][$guild]["HQ"]["Z"];
                     $world1 = $this->config["Guilds"][$guild]["HQ"]["World"];
-                    if (!$p->getLevel()->getName() === $world1) {
+                    if ($p->getLevel()->getName() !== $world1) {
                         continue;
                     }
-                    $gloc = new Location(Server::getInstance()->getLevel($world1), $X1, $Y1, $Z1);
+                    $gloc = new Location($X1, $Y1, $Z1, 0, 0, Server::getInstance()->getLevelByName($world1));
                     if ($loc->distance($gloc) > 50.0) {
                         continue;
                     }
                     if (!isset($this->config[$p->getName()])) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
-                    if (!$this->config[$p->getName()]["Guild"]["Name"] === $guild) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                    if ($this->config[$p->getName()]["Guild"]["Name"] !== $guild) {
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
@@ -111,25 +117,25 @@ class RpgGuilds extends PluginBase implements Listener
         if ($this->config["No Build"]) {
             $loc = $p->getLocation();
             foreach ($this->config["Guilds"] as $guild => $value) {
-                if ($this->config["Guilds"][$guild]["HQ"] != null) {
+                if (isset($this->config["Guilds"][$guild]["HQ"])) {
                     $X1 = $this->config["Guilds"][$guild]["HQ"]["X"];
                     $Y1 = $this->config["Guilds"][$guild]["HQ"]["Y"];
                     $Z1 = $this->config["Guilds"][$guild]["HQ"]["Z"];
                     $world1 = $this->config["Guilds"][$guild]["HQ"]["World"];
-                    if (!$p->getLevel()->getName() === $world1) {
+                    if ($p->getLevel()->getName() !== $world1) {
                         continue;
                     }
-                    $gloc = new Location(Server::getInstance()->getLevel($world1), $X1, $Y1, $Z1);
+                    $gloc = new Location($X1, $Y1, $Z1, 0, 0, Server::getInstance()->getLevelByName($world1));
                     if ($loc->distance($gloc) > 50.0) {
                         continue;
                     }
                     if (!isset($this->config[$p->getName()])) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
-                    if (!$this->config[$p->getName()]["Guild"]["Name"] === $guild) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                    if ($this->config[$p->getName()]["Guild"]["Name"] !== $guild) {
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
@@ -145,25 +151,25 @@ class RpgGuilds extends PluginBase implements Listener
         if ($this->config["No Build"]) {
             $loc = $p->getLocation();
             foreach ($this->config["Guilds"] as $guild => $value) {
-                if ($this->config["Guilds"][$guild]["HQ"] != null) {
+                if (isset($this->config["Guilds"][$guild]["HQ"])) {
                     $X1 = $this->config["Guilds"][$guild]["HQ"]["X"];
                     $Y1 = $this->config["Guilds"][$guild]["HQ"]["Y"];
                     $Z1 = $this->config["Guilds"][$guild]["HQ"]["Z"];
                     $world1 = $this->config["Guilds"][$guild]["HQ"]["World"];
-                    if (!$p->getLevel()->getName() === $world1) {
+                    if ($p->getLevel()->getName() !== $world1) {
                         continue;
                     }
-                    $gloc = new Location(Server::getInstance()->getLevel($world1), $X1, $Y1, $Z1);
+                    $gloc = new Location($X1, $Y1, $Z1, 0, 0, Server::getInstance()->getLevelByName($world1));
                     if ($loc->distance($gloc) > 50.0) {
                         continue;
                     }
                     if (!isset($this->config[$p->getName()])) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
-                    if (!$this->config[$p->getName()]["Guild"]["Name"] === $guild) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                    if ($this->config[$p->getName()]["Guild"]["Name"] !== $guild) {
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
@@ -179,25 +185,25 @@ class RpgGuilds extends PluginBase implements Listener
         if ($this->config["No Build"]) {
             $loc = $p->getLocation();
             foreach ($this->config["Guilds"] as $guild => $value) {
-                if ($this->config["Guilds"][$guild]["HQ"] != null) {
+                if (isset($this->config["Guilds"][$guild]["HQ"])) {
                     $X1 = $this->config["Guilds"][$guild]["HQ"]["X"];
                     $Y1 = $this->config["Guilds"][$guild]["HQ"]["Y"];
                     $Z1 = $this->config["Guilds"][$guild]["HQ"]["Z"];
                     $world1 = $this->config["Guilds"][$guild]["HQ"]["World"];
-                    if (!$p->getLevel()->getName() === $world1) {
+                    if ($p->getLevel()->getName() !== $world1) {
                         continue;
                     }
-                    $gloc = new Location(Server::getInstance()->getLevel($world1), $X1, $Y1, $Z1);
+                    $gloc = new Location($X1, $Y1, $Z1, 0, 0, Server::getInstance()->getLevelByName($world1));
                     if ($loc->distance($gloc) > 50.0) {
                         continue;
                     }
                     if (!isset($this->config[$p->getName()])) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
-                    if (!$this->config[$p->getName()]["Guild"]["Name"] === $guild) {
-                        $p->sendMessage($guild . "의 길드본부에서 건설 할 수 없습니다!");
+                    if ($this->config[$p->getName()]["Guild"]["Name"] !== $guild) {
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $guild . "의 길드본부에서 건설 할 수 없습니다!");
                         $event->setCancelled(true);
                         return;
                     }
@@ -209,6 +215,7 @@ class RpgGuilds extends PluginBase implements Listener
 
     public function onPlayerDeath(PlayerDeathEvent $event)
     {
+        $pl = null;
         $p = $event->getEntity();
         $lastDmg = $p->getLastDamageCause();
         if ($lastDmg instanceof EntityDamageByEntityEvent) {
@@ -223,6 +230,7 @@ class RpgGuilds extends PluginBase implements Listener
 
     public function onPlayerDmg(EntityDamageByEntityEvent $event)
     {
+        $child = null;
         if ($event->getEntity() instanceof Player) {
             $a = $event->getEntity();
             $b = null;
@@ -253,7 +261,7 @@ class RpgGuilds extends PluginBase implements Listener
             $guild = $this->config[$player->getName()]["Guild"]["Name"];
             $tag = $this->config["Guilds"][$guild]["Tag"];
             if ($this->config["Chat"]) {
-                $event->setMessage("§F[§2" . $tag . "§f] " . $event->getMessage());
+                $event->setMessage("§d[§b " . $tag . " §d] §f" . $event->getMessage());
             }
         }
     }
@@ -263,22 +271,22 @@ class RpgGuilds extends PluginBase implements Listener
         $player = $event->getPlayer();
         $event->setJoinMessage(null);
         $newkills = 0;
-        if ($this->config["Kills"][$player->getName()] == null) {
+        if (!isset($this->config["Kills"][$player->getName()])) {
             $this->config["Kills"][$player->getName()] = $newkills;
         }
-        if ($this->config[$player->getName()]) {
+        if (isset($this->config[$player->getName()])) {
             $guild = $this->config[$player->getName()]["Guild"]["Name"];
             foreach ($this->config["Guilds"][$guild]["Players"] as $key => $value) {
                 if (Server::getInstance()->getPlayer($key) != null) {
                     if (Server::getInstance()->getPlayer($key)->getName() == $player->getName()) {
-                        if ($this->config["Guilds"][$guild]["Gmotd"] != null) {
-                            $player->sendMessage($this->config["Guilds"][$guild]["Gmotd"]);
+                        if (isset($this->config["Guilds"][$guild]["Gmotd"])) {
+                            $player->sendMessage("§d[ §f길드 §d] §f" . $this->config["Guilds"][$guild]["Gmotd"]);
                         } else {
-                            $player->sendMessage("당신은 " . $guild . "의 구성원입니다!");
+                            $player->sendMessage("§d[ §f길드 §d] §f당신은 " . $guild . "의 구성원입니다!");
                         }
                     } else {
                         $p = Server::getInstance()->getPlayer($key);
-                        $p->sendMessage("§3" . $player->getName() . "§2님이 접속하였습니다!");
+                        $p->sendMessage("§d[ §f길드 §d] §f" . $player->getName() . "님이 접속하였습니다!");
                     }
                 }
             }
@@ -296,8 +304,8 @@ class RpgGuilds extends PluginBase implements Listener
         $player2 = $p2;
         $loc = $player->getLocation();
         $loc2 = $player2->getLocation();
-        $player->sendMessage("곧 순간이동 됩니다, 움직이지 마세요!");
-        $player2->sendMessage("곧 순간이동 됩니다, 움직이지 마세요!");
+        $player->sendMessage("§d[ §f길드 §d] §f곧 순간이동 됩니다, 움직이지 마세요!");
+        $player2->sendMessage("§d[ §f길드 §d] §f곧 순간이동 됩니다, 움직이지 마세요!");
         $this->getScheduler()->scheduleDelayedRepeatingTask(new TeleportTask($this, $player, $player2, $loc, $loc2), 20, 20);
     }
 
@@ -305,12 +313,12 @@ class RpgGuilds extends PluginBase implements Listener
     {
         $player = $event->getPlayer();
         $event->setQuitMessage(null);
-        if ($this->config[$player->getName()]) {
+        if (isset($this->config[$player->getName()])) {
             $guild = $this->config[$player->getName()]["Guild"]["Name"];
             foreach ($this->config["Guilds"][$guild]["Players"] as $key => $value) {
                 if (Server::getInstance()->getPlayer($key) != null) {
                     $p = Server::getInstance()->getPlayer($key);
-                    $p->sendMessage("§3" . $player->getName() . "§2님이 접속을 종료하였습니다!");
+                    $p->sendMessage("§d[ §f길드 §d] §f" . $player->getName() . "님이 접속을 종료하였습니다!");
                 }
             }
         }

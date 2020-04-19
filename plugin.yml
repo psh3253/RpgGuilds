@@ -15,7 +15,7 @@ api:
 
 commands:
   길드:
-    description: Base guild command
+    description: 길드
     usage: /길드 <생성, 초대, 수락, 거절, 입장메시지, 추방, 해산, 탈퇴, 목록>
   g:
     description: 길드 채팅
@@ -29,9 +29,9 @@ commands:
   gtp:
     description: 길드 순간이동
     usage: /gtp <유저>
-  길드목록:
-    description: 길드 목록
-    usage: /길드목록
+  길드정보:
+    description: 길드 정보
+    usage: /길드정보
   조회:
     description: 유저 상태 조회
     usage: /조회 <유저>

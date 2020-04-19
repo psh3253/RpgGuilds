@@ -30,14 +30,14 @@ class gcHandler implements CommandExecutor
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
         $player = $sender;
-        $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
-        $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];;
         if (!isset($this->plugin->config[$player->getName()])) {
-            $player->sendMessage("가입된 길드가 존재하지 않습니다!");
+            $player->sendMessage("§d[ §f길드 §d] §f가입된 길드가 존재하지 않습니다!");
             return true;
         }
+        $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
+        $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
         if (!$this->plugin->config["Guilds"][$guildn]["Ranks"][$grank]["Gchat"]) {
-            $player->sendMessage("이 길드에서 대화 할 권한이 없습니다!");
+            $player->sendMessage("§d[ §f길드 §d] §f이 길드에서 대화 할 권한이 없습니다!");
             return true;
         }
         $buffer = "";
@@ -49,7 +49,7 @@ class gcHandler implements CommandExecutor
         foreach ($this->plugin->config["Guilds"][$guildn]["Players"] as $key => $value) {
             if (Server::getInstance()->getPlayer($key) != null) {
                 $p = Server::getInstance()->getPlayer($key);
-                $p->sendMessage("§F[" . $title . "§F]" . $player->getName() . ": §2" . $s);
+                $p->sendMessage("§d[ " . $title . " §d] §a" . $player->getName() . " :" . $s);
             }
         }
         return true;
