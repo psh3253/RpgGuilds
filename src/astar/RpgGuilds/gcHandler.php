@@ -49,7 +49,12 @@ class gcHandler implements CommandExecutor
         foreach ($this->plugin->config["Guilds"][$guildn]["Players"] as $key => $value) {
             if (Server::getInstance()->getPlayer($key) != null) {
                 $p = Server::getInstance()->getPlayer($key);
-                $p->sendMessage("§d[ " . $title . " §d] §a" . $player->getName() . " :" . $s);
+                if ($this->plugin->config["Rank Names in Guild Chat"]) {
+                    $p->sendMessage("§d[ " . $title . " §d] §a" . $player->getName() . " :" . $s);
+                } else {
+                    $p->sendMessage("§a" . $player->getName() . " :" . $s);
+                }
+
             }
         }
         return true;

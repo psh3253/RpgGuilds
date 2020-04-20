@@ -57,6 +57,11 @@ class RpgGuilds extends PluginBase implements Listener
             $this->getConfig()->setAll($this->config);
             $this->saveConfig();
         }
+        if (!isset($this->config["Rank Names in Guild Chat"])) {
+            $this->config["Rank Names in Guild Chat"] = true;
+            $this->getConfig()->setAll($this->config);
+            $this->saveConfig();
+        }
         if (!isset($this->config["Chat"])) {
             $this->config["Chat"] = true;
             $this->getConfig()->setAll($this->config);

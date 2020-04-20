@@ -214,7 +214,7 @@ class gRankHandler implements CommandExecutor
         } else if ($args[0] === "권한") {
             $player = $sender;
             if (count($args) != 4) {
-                $player->sendMessage("§d[ §f길드 §d] §f잘못된 사용법 입니다! Please use /길드계급 권한 <계급> <권한> <true/false>을 사용하세요!");
+                $player->sendMessage("§d[ §f길드 §d] §f잘못된 사용법 입니다! /길드계급 권한 <계급> <권한> <true/false>을 사용하세요!");
                 return true;
             }
             if (!isset($this->plugin->config[$player->getName()])) {
