@@ -62,43 +62,39 @@ class GuildHandler implements CommandExecutor
                 $player->sendMessage("§d[ §f길드 §d] §f" . str_replace("_", " ", $args[1]) . " 이름을 가진 길드가 이미 존재합니다!");
                 return true;
             }
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Players"][$player->getName()]["Rank"] = "Leader";
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Leader"] = $player->getName();
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Players"][$player->getName()]["Rank"] = "길드마스터";
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["길드마스터"] = $player->getName();
             $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Tag"] = $args[2];
             $this->plugin->config[$player->getName()]["Guild"]["Name"] = str_replace("_", " ", $args[1]);
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["DefTerm"]["Leader"] = "Leader";
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Invite"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Ochat"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Kick"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Gmotd"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Disband"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Gchat"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["RankSet"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["RankTitle"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["CreateRank"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["DeleteRank"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["PlayerInfo"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["RankPerms"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["PlayerNotes"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["PlayerNotesView"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["PlayerNotesSet"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["TP"] = true;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Leader"]["Title"] = "§c길드 마스터";
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Invite"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Ochat"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Kick"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Gmotd"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Disband"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Gchat"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["RankSet"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["RankTitle"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["CreateRank"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["DeleteRank"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["PlayerInfo"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["RankPerms"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["TP"] = false;
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["Newbies"]["Title"] = "§b초보자";
-            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["DefTerm"]["Default"] = "Newbies";
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["DefTerm"]["길드마스터"] = "길드마스터";
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Invite"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Ochat"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Kick"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Gmotd"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Disband"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Gchat"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["RankSet"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["RankTitle"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["CreateRank"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["DeleteRank"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["PlayerInfo"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["RankPerms"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["TP"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["길드마스터"]["Title"] = "§e길드마스터";
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Invite"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Ochat"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Kick"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Gmotd"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Disband"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Gchat"] = true;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["RankSet"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["RankTitle"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["CreateRank"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["DeleteRank"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["RankPerms"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["TP"] = false;
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["Ranks"]["초보자"]["Title"] = "§b초보자";
+            $this->plugin->config["Guilds"][str_replace("_", " ", $args[1])]["DefTerm"]["Default"] = "초보자";
             $this->plugin->getConfig()->setAll($this->plugin->config);
             $this->plugin->saveConfig();
             $player->sendMessage("§d[ §f길드 §d] §f축하합니다 " . $player->getName() . " 당신은 이제 새로 만들어진 길드 " . str_replace("_", " ", $args[1]) . "의 리더입니다.");
@@ -172,7 +168,7 @@ class GuildHandler implements CommandExecutor
                 return true;
             }
             $guildn2 = $this->plugin->config["Pending"][$player->getName()]["Guild"];
-            $lead = $this->plugin->config["Guilds"][$guildn2]["Leader"];
+            $lead = $this->plugin->config["Guilds"][$guildn2]["길드마스터"];
             if (Server::getInstance()->getPlayer($lead) != null) {
                 $gleader = Server::getInstance()->getPlayer($lead);
                 $gleader->sendMessage("§d[ §f길드 §d] §f" . $player->getName() . "님이 길드 초대를 거절했습니다!");
@@ -224,7 +220,7 @@ class GuildHandler implements CommandExecutor
                 return true;
             }
             $prank = $this->plugin->config["Guilds"][$guildn2]["Players"][$args[1]]["Rank"];
-            if ($prank === "Leader") {
+            if ($prank === "길드마스터") {
                 $player->sendMessage("§d[ §f길드 §d] §f길드 리더를 추방할 수 없습니다!");
                 return true;
             }

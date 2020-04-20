@@ -43,7 +43,7 @@ class hqCommand implements CommandExecutor
             }
             $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
             $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
-            $leader = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
+            $leader = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["길드마스터"];
             if ($grank !== $leader) {
                 $player->sendMessage("§d[ §f길드 §d] §f길드 리더만이 길드본부를 설정할 수 있습니다!");
                 return true;

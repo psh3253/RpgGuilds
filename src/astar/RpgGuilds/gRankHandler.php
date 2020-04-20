@@ -132,7 +132,7 @@ class gRankHandler implements CommandExecutor
                 $player->sendMessage("§d[ §f길드 §d] §f해당 유저는 길드의 구성원이 아닙니다!");
                 return true;
             }
-            $leader = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
+            $leader = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["길드마스터"];
             //$player->sendMessage("grank = " . $grank . "prank = " . $prank . "guiln = " . $guildn . " leader = " . $leader);
 
             $newbie = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Default"];
@@ -143,7 +143,7 @@ class gRankHandler implements CommandExecutor
             if (str_replace("_", " ", $args[2]) === $leader && $grank === $leader) {
                 $this->plugin->config["Guilds"][$guildn]["Players"][$args[1]]["Rank"] = $leader;
                 $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"] = $newbie;
-                $this->plugin->config["Guilds"][$guildn]["Leader"] = $args[1];
+                $this->plugin->config["Guilds"][$guildn]["길드마스터"] = $args[1];
                 $this->plugin->getConfig()->setAll($this->plugin->config);
                 $this->plugin->saveConfig();
                 $player->sendMessage("§d[ §f길드 §d] §f당신은 더 이상 " . $guildn . "의 리더가 아닙니다!");
@@ -231,7 +231,7 @@ class gRankHandler implements CommandExecutor
                 $player->sendMessage("§d[ §f길드 §d] §f이 계급은 존재하지 않습니다!");
                 return true;
             }
-            $leader2 = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
+            $leader2 = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["길드마스터"];
             if (str_replace("_", " ", $args[1]) === $leader2) {
                 $player->sendMessage("§d[ §f길드 §d] §f길드 리더의 권한을 변경할 수 없습니다!");
                 return true;
@@ -261,13 +261,13 @@ class gRankHandler implements CommandExecutor
                 $player = $sender;
                 $guildn = $this->plugin->config[$player->getName()]["Guild"]["Name"];
                 $grank = $this->plugin->config["Guilds"][$guildn]["Players"][$player->getName()]["Rank"];
-                $leader2 = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"];
+                $leader2 = $this->plugin->config["Guilds"][$guildn]["DefTerm"]["길드마스터"];
                 if (!$grank === $leader2) {
                     $player->sendMessage("오직 길드 리더만 기본 권한 이름을 변경할 수 있습니다!");
                     return true;
                 }
                 if ($args[1] === "리더") {
-                    $this->plugin->config["Guilds"][$guildn]["DefTerm"]["Leader"] = str_replace("_", " ", str_replace("&", "§", $args[2]));
+                    $this->plugin->config["Guilds"][$guildn]["DefTerm"]["길드마스터"] = str_replace("_", " ", str_replace("&", "§", $args[2]));
                     $this->plugin->saveConfig();
                     $player->sendMessage("리더 계급 이름을 " . str_replace("_", " ", str_replace("&", "§", $args[2])) . "로 변경하였습니다.");
                     return true;

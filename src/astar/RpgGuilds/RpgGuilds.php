@@ -43,12 +43,12 @@ class RpgGuilds extends PluginBase implements Listener
         $this->getCommand("길드본부")->setExecutor(new hqCommand($this));
         $this->getCommand("길드계급")->setExecutor(new gRankHandler($this));
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("§d[ §f길드 §d] §fRpgGuilds가 활성화 되었습니다!");
+        $this->getLogger()->info("RpgGuilds가 활성화 되었습니다!");
 
         $this->saveDefaultConfig();
         $this->config = $this->getConfig()->getAll();
         if (!isset($this->config["TP"])) {
-            $this->config["TP"] = false;
+            $this->config["TP"] = true;
             $this->getConfig()->setAll($this->config);
             $this->saveConfig();
         }
@@ -72,7 +72,7 @@ class RpgGuilds extends PluginBase implements Listener
 
     public function onDisable()
     {
-        $this->getLogger()->info("§d[ §f길드 §d] §fRpgGuilds가 비활성화 되었습니다!");
+        $this->getLogger()->info("RpgGuilds가 비활성화 되었습니다!");
         $this->getConfig()->setAll($this->config);
         $this->saveConfig();
     }
